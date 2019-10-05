@@ -2,3 +2,7 @@
 /dist/
 *.csv
 
+/Lab3.5/nbproject/private/
+/Assign_3/build/
+/Assign_3/dist/
+/Assign_3/nbproject/private/
