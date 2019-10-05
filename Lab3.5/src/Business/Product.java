@@ -12,32 +12,35 @@ package Business;
  */
 public class Product {
     private String name;
-    private String price;
-    private String availNum;
-
+    private double price;
+    private int availNum;
+  
+     private String description;
     public String getName() {
         return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getAvailNum() {
+        return availNum;
+    }
+
+    public void setAvailNum(int availNum) {
+        this.availNum = availNum;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getAvailNum() {
-        return availNum;
-    }
-
-    public void setAvailNum(String availNum) {
-        this.availNum = availNum;
-    }
+  
 
     public String getDescription() {
         return description;
@@ -46,6 +49,12 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-    private String description;
+   
+    @Override
+  public String toString(){
+  return name;
+  
+  }
+   
     
 }
