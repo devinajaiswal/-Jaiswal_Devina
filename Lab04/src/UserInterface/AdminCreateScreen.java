@@ -52,7 +52,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         txtPword = new javax.swing.JTextField();
         txtRePword = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        pwdLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         radioCustomer = new javax.swing.JRadioButton();
         radioSupplier = new javax.swing.JRadioButton();
@@ -71,9 +71,15 @@ public class AdminCreateScreen extends javax.swing.JPanel {
             }
         });
 
+        txtPword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPwordActionPerformed(evt);
+            }
+        });
+
         usernameLabel.setText("username:");
 
-        jLabel2.setText("password:");
+        pwdLabel.setText("password:");
 
         jLabel3.setText("re-enter password :");
 
@@ -103,7 +109,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pwdLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +139,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(pwdLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRePword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,6 +179,15 @@ public class AdminCreateScreen extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Email should be in a format xxx_xxx@xx.xxx");
             return;
         }
+        
+        if(!passwordPattern()){
+            pwdLabel.setForeground(Color.red);
+            txtPword.setBorder(new LineBorder(Color.red));
+            JOptionPane.showMessageDialog(null, "Password length should be atleast 6, contain atleast one upper case, one lower case one digit and one special character (&,#,*,$)");
+            return;
+        
+        
+        }
         if(radioSupplier.isSelected()){
         Supplier s1= new Supplier(p2,username);
         this.admin.getSuppDir().getSupplierList().add(s1);
@@ -197,16 +212,13 @@ public class AdminCreateScreen extends javax.swing.JPanel {
     return b;
    }
     
-//    private boolean passwordPattern(){
-//    Pattern p=Pattern.compile("^(?=\\S*[a-z])(?=\\S*[A-Z])(?=\\S*\\d)(?=\\S*[^\\w\\s])\\S{6,}$");
-//    Matcher m =p.matcher(txtPword.getText());
-//    boolean b=m.matches();
-//    return b;
-//    
-//    
-//    
-//    
-//    }
+    private boolean passwordPattern(){
+    Pattern p=Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$#*&])[A-Za-z\\d$#*&]{6,}$");
+    Matcher m =p.matcher(txtPword.getText());
+    boolean b=m.matches();
+    return b;
+    
+}
     
     private void radioCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioCustomerActionPerformed
         // TODO add your handling code here:
@@ -223,13 +235,17 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
+    private void txtPwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPwordActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel pwdLabel;
     private javax.swing.JRadioButton radioCustomer;
     private javax.swing.JRadioButton radioSupplier;
     private javax.swing.JTextField txtPword;
