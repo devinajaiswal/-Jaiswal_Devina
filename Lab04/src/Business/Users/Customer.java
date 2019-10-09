@@ -11,17 +11,27 @@ import java.util.Date;
 
 /**
  *
- * @author AEDSpring2019
+* @author devinajaiswal
  */
  public abstract class Customer extends User {
         private ProductDirectory directory;
+        private Date createdOn;
         public Customer(String password, String userName) {
         super(password, userName, "CUSTOMER");
+        createdOn=new Date();
         directory = new ProductDirectory();
         
     }
          public ProductDirectory getDirectory() {
         return directory;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 
     public void setDirectory(ProductDirectory directory) {

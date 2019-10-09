@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author AEDSpring2019
+* @author devinajaiswal
  */
 public class AdminMainScreen extends javax.swing.JPanel {
 
@@ -120,6 +120,16 @@ public class AdminMainScreen extends javax.swing.JPanel {
             row[0]=s;
             row[1]=s.getDirectory().getProductList().size();
             dtm.addRow(row);
+        }
+        DefaultTableModel dtm1 = (DefaultTableModel)tableCust.getModel();
+         dtm1.setRowCount(0);
+        for(User u: admin.getCustDir().getCustomerList()){
+           Customer c=(Customer)u;
+           Object[] row1 = new Object[dtm.getColumnCount()];
+           row1[0]=c;
+           row1[1]=c.getCreatedOn();
+            dtm1.addRow(row1);
+        
         }
 
     }

@@ -11,7 +11,7 @@ import java.awt.CardLayout;
 
 /**
  *
- * @author AEDSpring2019
+* @author devinajaiswal
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -114,6 +114,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupplierActionPerformed
         // TODO add your handling code here:
+         
+        btnSupplier.setActionCommand("Supplier");
         CardLayout layout = (CardLayout)panelRight.getLayout();
         panelRight.add(new LoginScreen(panelRight, adminUser.getSuppDir().getSupplierList()));
         layout.next(panelRight);
@@ -121,13 +123,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
+        
+        btnCustomer.setActionCommand("Customer");
         CardLayout layout = (CardLayout)panelRight.getLayout();
+        
         panelRight.add(new LoginScreen(panelRight, adminUser.getCustDir().getCustomerList()));
         layout.next(panelRight);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         // TODO add your handling code here:
+
         CardLayout layout = (CardLayout)panelRight.getLayout();
         panelRight.add(new AdminMainScreen(panelRight, (Admin)adminUser));
         layout.next(panelRight);

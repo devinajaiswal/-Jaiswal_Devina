@@ -4,18 +4,20 @@
  * and open the template in the editor.
  */
 package UserInterface;
-
+import java.awt.event.*;
 import Business.Abstract.User;
 import Business.Users.Customer;
 import Business.Users.Supplier;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
- * @author AEDSpring2019
+* @author devinajaiswal
  */
 public class LoginScreen extends javax.swing.JPanel {
 
@@ -24,12 +26,15 @@ public class LoginScreen extends javax.swing.JPanel {
      */
     List<User> list;
     JPanel panelRight;
+    
     public LoginScreen(JPanel panelRight, List<User> list) {
         initComponents();
         this.list = list;
         this.panelRight = panelRight;
         initialize();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +50,12 @@ public class LoginScreen extends javax.swing.JPanel {
         comboUser = new javax.swing.JComboBox<>();
         txtTitle = new javax.swing.JLabel();
 
+        txtPword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPwordActionPerformed(evt);
+            }
+        });
+
         btnSubmit.setText("Login");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +64,11 @@ public class LoginScreen extends javax.swing.JPanel {
         });
 
         comboUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboUserActionPerformed(evt);
+            }
+        });
 
         txtTitle.setText("Supplier Login Screen");
 
@@ -61,19 +77,18 @@ public class LoginScreen extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPword)
-                    .addComponent(comboUser, 0, 166, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(btnSubmit)
-                .addContainerGap(171, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(btnSubmit))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(195, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPword)
+                                .addComponent(comboUser, 0, 166, Short.MAX_VALUE))
+                            .addComponent(txtTitle))))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +124,34 @@ public class LoginScreen extends javax.swing.JPanel {
               JOptionPane.showMessageDialog(null, "Please enter a valid password!");
               
               }
+              
            
            }
         
-        
+           else if(u.getRole()=="CUSTOMER") {
+            
+             Customer c=(Customer) u;
+             if(c.verify(password)){
+                 
+                 grantAccess(u);
+                 
+             }
+             else {
+              JOptionPane.showMessageDialog(null, "Please enter a valid password!");
+             }
+           
+           }
         }
         
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void comboUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboUserActionPerformed
+
+    private void txtPwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPwordActionPerformed
  
     private void grantAccess(User u){
      SuccessScreen ss=new SuccessScreen(u);
@@ -136,16 +172,26 @@ public class LoginScreen extends javax.swing.JPanel {
     private void initialize(){
         //text should either be "Supplier Login Screen" OR "Customer Login Screen"
         //Based on the selection
-        txtTitle.setText("****** Login Screen");
+           
         comboUser.removeAllItems();
         //only customer or suppliers should be listed based on the selection
-        for(User u:list){
-          comboUser.addItem(u);
-        
-        }
-        
-    }
-    
+          
+         for(User u:list){
+          String roleOfUser = " ";  
+            roleOfUser =  u.getRole();
+            comboUser.addItem(u);
+            if(roleOfUser.equals("SUPPLIER")){
+               txtTitle.setText("Supplier Login Screen"); 
+            }
+            else if(roleOfUser.equals("CUSTOMER")){
+                txtTitle.setText("Customer Login Screen"); 
+            }
+               
+          }
+          
+     }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;

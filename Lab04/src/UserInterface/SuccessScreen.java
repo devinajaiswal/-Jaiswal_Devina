@@ -9,7 +9,7 @@ import Business.Abstract.User;
 
 /**
  *
- * @author AEDSpring2019
+* @author devinajaiswal
  */
 public class SuccessScreen extends javax.swing.JPanel {
 
